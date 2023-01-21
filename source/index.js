@@ -363,49 +363,70 @@ const htmlContent = `
 			}
 			
 			body{
+				background-color: #212529;
 				margin: 20px;
 				margin-bottom: 0;
 				font: 13px normal Verdana, Arial, "sans-serif";
 			}
 			
 			#text{
+				color: #ffffff;
 				height: 26px;
 				overflow: auto;
-				font-size: 14px;
+				font-size: 1rem;
 				font-weight: bold;
 				padding: 5px 0;
 				word-break: break-all;
 			}
 			
 			#detail{
+				color: #c6c8d0;
 				height: 40px;
 				margin: 5px 0;
+				font-size: 0.875rem;
 				padding: 5px 0;
 				word-break: break-all;
 			}
 			
 			#progressBarContainer{
 				text-align: center;
+
+				display: flex;
+				height: .7rem;
+				overflow: hidden;
+				font-size: .75rem;
+				background-color: #3e4347;
+				border-radius: 0.25rem;
+			}
+
+			#progressBar{
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				overflow: hidden;
+				color: #fff;
+				text-align: center;
+				white-space: nowrap;
+				background-color: #2e79ea;
+				transition: width .6s ease;
 			}
 			
 			progress{
 				-webkit-appearance: none;
 				appearance: none;
 				width: 100%;
-				height: 25px;
+				height: .5rem;
 			}
 			
 			progress::-webkit-progress-bar{
 				width: 100%;
-				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
-				border-radius: 2px;
+				border-radius: .2rem;
 				background: #DEDEDE;
 			}
 			
 			progress::-webkit-progress-value{
-				box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
-				border-radius: 2px;
-				background: #22328C;
+				border-radius: .2rem;
+				background: #000000;
 			}
 			
 			#progressBar[indeterminate="t"]{
@@ -415,7 +436,7 @@ const htmlContent = `
 				margin: 0.5rem 0 1rem 0;
 				width: 100%;
 				height: 10px;
-				border-radius: 2px;
+				border-radius: .2rem;
 				background-color: #DEDEDE;
 				background-clip: padding-box;
 			}
@@ -520,10 +541,11 @@ const htmlContent = `
 					elements.progressBar = progressBar;
 					elements.progressBarContainer.appendChild(elements.progressBar);
 				}else{
-					var progressBar = document.createElement("progress");
+					var progressBar = document.createElement("div");
 					progressBar.setAttribute("id", "progressBar");
 					progressBar.max = settings.maxValue;
-					
+					progressBar.style.width = '0%';
+
 					elements.progressBar = progressBar;
 					elements.progressBarContainer.appendChild(elements.progressBar);
 				}
@@ -544,6 +566,7 @@ const htmlContent = `
 			
 			ipcRenderer.on("SET_PROGRESS", (event, value) => {
 				currentValue.progress = value;
+				elements.progressBar.style.width = value+'%';
 			});
 			
 			ipcRenderer.on("SET_COMPLETED", (event) => {
