@@ -7,6 +7,9 @@
     "type": "git",
     "url": "git+https://github.com/AndersonMamede/electron-progressbar.git"
   },
+  "scripts": {
+    "demo": "electron demo/index.js"
+  },
   "keywords": [
     "electron",
     "progress",
@@ -24,11 +27,11 @@
     "url": "https://github.com/AndersonMamede/electron-progressbar/issues"
   },
   "homepage": "https://github.com/AndersonMamede/electron-progressbar",
-  "devDependencies": {
-    "electron": "^1.7.5"
-  },
   "dependencies": {
     "extend": "^3.0.1"
   },
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "devDependencies": {
+    "electron": "^22.0.3"
+  }
 }
